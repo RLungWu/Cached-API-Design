@@ -1,4 +1,4 @@
-module github.com/RLungWu/Dcard-Backend-HW.git
+module github.com/RLungWu/Dcard-Backend-HW
 
 go 1.22.0
 
