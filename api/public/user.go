@@ -1,7 +1,7 @@
 package public
 
 import (
-	ad "github.com/RLungWu/Dcard-Backend-HW/api/Ad"
+	"github.com/RLungWu/Dcard-Backend-HW/api/ad"
 	"github.com/gin-gonic/gin"
 )
 
