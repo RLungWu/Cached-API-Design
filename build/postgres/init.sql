@@ -1,5 +1,6 @@
 CREATE TABLE "Ad" (
-  "title" string PRIMARY KEY,
+  "adId" bigserial PRIMARY KEY,
+  "title" text,
   "startAt" timestamp,
   "endAt" timestamp,
   "conditionId" bigserial
@@ -8,20 +9,20 @@ CREATE TABLE "Ad" (
 CREATE TABLE "Condition" (
   "conditionId" bigserial,
   "ageStart" int,
-  "country" string,
-  "platform" string
+  "country" text,
+  "platform" text
 );
 
 CREATE TABLE "ConditionsCountry" (
   "conditionCountryId" bigserial PRIMARY KEY,
   "conditionId" bigserial,
-  "country" string
+  "country" text
 );
 
 CREATE TABLE "ConditionsPlatform" (
   "conditionPlatformId" bigserial PRIMARY KEY,
   "conditionId" bigserial,
-  "platform" string
+  "platform" text
 );
 
 ALTER TABLE "Ad" ADD FOREIGN KEY ("conditionId") REFERENCES "Condition" ("conditionId");

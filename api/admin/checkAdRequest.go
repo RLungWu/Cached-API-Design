@@ -5,10 +5,12 @@ import (
 	"fmt"
 	"strings"
 	"time"
+
+	"github.com/RLungWu/Dcard-Backend-HW/api/ad"
 	"github.com/biter777/countries"
 )
 
-func checkAdRequest(ad *AdRequest) error {
+func checkAdRequest(ad *ad.AdRequest) error {
 	if err := checkTitle(ad.Title); err != nil {
 		return fmt.Errorf("title is incorrect with : %w", err)
 	}
@@ -45,7 +47,7 @@ func checkStartAndEnd(startAt, endAt time.Time) error {
 	return nil
 }
 
-func checkConditions(conditions Contition) error {
+func checkConditions(conditions ad.Contition) error {
 	if conditions.AgeStart != nil {
 		if *conditions.AgeStart < 1 {
 			return errors.New("ageStart must be greater than 0")

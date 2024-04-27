@@ -1,4 +1,4 @@
-package admin
+package ad
 
 import "time"
 
