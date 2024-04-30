@@ -24,6 +24,9 @@ func AdminCreateAD(c *gin.Context) {
 		})
 		return
 	}
+	
+
+
 
 	//Put in Postgres
 	pgdb := postgre.CreatePGClient()
