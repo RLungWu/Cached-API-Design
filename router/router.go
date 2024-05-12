@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/RLungWu/Dcard-Backend-v2/cmd/main"
 	"github.com/RLungWu/Dcard-Backend-v2/pkg/ad"
+	"github.com/RLungWu/Dcard-Backend-v2/pkg/cache"
 
 	"github.com/gin-gonic/gin"
 )
@@ -27,7 +27,7 @@ func CreateAdHandler(c *gin.Context) {
 }
 
 func ListAdsHandler(c *gin.Context) {
-	var query main.AdQuery
+	var query ad.AdQuery
 	if err := c.ShouldBindQuery(&query); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

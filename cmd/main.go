@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"github.com/RLungWu/Dcard-Backend-v2/db"
-	"github.com/RLungWu/Dcard-Backend-v2/pkg/ad"
 	"github.com/RLungWu/Dcard-Backend-v2/pkg/cache"
 	"github.com/RLungWu/Dcard-Backend-v2/router"
 
@@ -15,7 +14,7 @@ import (
 )
 
 var (
-	cacheAd = ad.Cachee{}
+	cacheAd = cache.Cache{}
 )
 
 func main() {

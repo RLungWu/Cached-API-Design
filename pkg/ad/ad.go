@@ -1,7 +1,6 @@
 package ad
 
 import (
-	"sync"
 	"time"
 )
 
@@ -27,20 +26,4 @@ type AdQuery struct {
 	Gender   string `form:"gender" binding:"omitempty,oneof=M F"`
 	Country  string `form:"country" binding:"omitempty,len=2,iso3166_1_alpha2"`
 	Platform string `form:"platform" binding:"omitempty,oneof=android ios web"`
-}
-
-type CachedAd struct {
-	ad       Ad
-	gender   map[string]bool
-	country  map[string]bool
-	platform map[string]bool
-}
-
-type Cachee struct {
-	genderIndex   map[string](map[*CachedAd]bool)
-	countryIndex  map[string](map[*CachedAd]bool)
-	platformIndex map[string](map[*CachedAd]bool)
-	ageIndex      []([]*CachedAd) // 0-100
-	ads           []*CachedAd
-	lock          sync.RWMutex
 }
