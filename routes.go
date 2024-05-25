@@ -1,33 +1,31 @@
-package router
+package main
 
 import (
 	"context"
 	"net/http"
 
-	"github.com/RLungWu/Dcard-Backend-v2/cmd/main"
-	"github.com/RLungWu/Dcard-Backend-v2/pkg/ad"
-
 	"github.com/gin-gonic/gin"
 )
 
-func CreateAdHandler(c *gin.Context) {
-	var ad ad.Ad
+func createAdHandler(c *gin.Context) {
+	var ad Ad
 	if err := c.ShouldBindJSON(&ad); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	result, err := ads.InsertOne(context.TODO(), ad)
+	_, err := ads.InsertOne(context.Background(), ad)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"id": result.InsertedID})
+	c.JSON(http.StatusCreated, ad)
 }
 
-func ListAdsHandler(c *gin.Context) {
-	var query main.AdQuery
+func getAdsHandler(c *gin.Context) {
+	var query AdQuery
+
 	if err := c.ShouldBindQuery(&query); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

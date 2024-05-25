@@ -1,8 +1,8 @@
-package db
+package main
 
 import (
 	"context"
-	"errors"
+	"log"
 	"os"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -12,28 +12,28 @@ import (
 var (
 	client   *mongo.Client
 	ads      *mongo.Collection
-	database = "adservice"
+	database = "adService"
 	coll     = "ads"
 )
 
-func InitDatabaseConnection() error{
-	uri := os.Getenv("MONGO_URI")
+func initialDatabaseConnection() {
+	uri := os.Getenv("MONGODB_URI")
 	if uri == ""{
-		return errors.New("MONGO_URI is not set")
+		log.Fatalf("MONGODB_URI is not set")
 	}
-
-	var err error
+	
 	clientOptions := options.Client().ApplyURI(uri)
-	client, err = mongo.Connect(context.TODO(), clientOptions)
+	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil{
-		return err
+		log.Fatal(err)
 	}
 
-	err = client.Ping(context.TODO(), nil)
+	err = client.Ping(context.Background(), nil)
 	if err != nil{
-		return err
+		log.Fatal(err)
 	}
 
 	ads = client.Database(database).Collection(coll)
-	return nil
+	log.Println("Connected to MongoDB")
+
 }
