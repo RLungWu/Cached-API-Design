@@ -57,14 +57,3 @@ On the other hand, the number of people who use admin api may be a little, we ca
 I just simply cache the ads in memory and update every second.
 
 !image()
-
-```mermaid
-graph TD
-    P[Publisher]
-    V[Viewer]
-    S[Server]
-    DB[Database]
-    M[In-Memory Cache]
-    P -->|Write| S -->|Write| DB -->|Update| M
-    M -->|Cached| S -->|Query| V
-```
