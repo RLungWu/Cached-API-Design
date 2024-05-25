@@ -56,4 +56,4 @@ On the other hand, the number of people who use admin api may be a little, we ca
 
 I just simply cache the ads in memory and update every second.
 
-!image()
+![Illustration](https://github.com/RLungWu/Dcard-Backend-HW/blob/main/img/Illustration.png)
