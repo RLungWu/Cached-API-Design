@@ -22,3 +22,15 @@ func createAdHandler(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, ad)
 }
+
+func getAdsHandler(c *gin.Context) {
+	var query AdQuery
+
+	if err := c.ShouldBindQuery(&query); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	results := cache.Filter(query)
+	c.JSON(http.StatusOK, results)
+}
