@@ -2,8 +2,7 @@ package main
 
 import (
 	"testing"
-
-	"golang.org/x/tools/go/expect"
+	"time"
 )
 
 func setupCache(cache *Cache) {
@@ -55,16 +54,15 @@ func setupCache(cache *Cache) {
 	cache.Update([]Ad{ad1, ad2, ad3, ad4})
 }
 
-
 func TestCacheFilter(t *testing.T) {
 	cache := Cache{}
 	setupCache(&cache)
 
-	testCases := []struct{
-		name string
-		query AdQuery
+	testCases := []struct {
+		name            string
+		query           AdQuery
 		expectedResults int
-		expectedTitles []string
+		expectedTitles  []string
 	}{
 		{"Filter by Limit", AdQuery{Offset: 0, Limit: 3}, 3, []string{"Ad 1", "Ad 2", "Ad 3"}},
 		{"Filter by Offset", AdQuery{Offset: 1, Limit: 3}, 3, []string{"Ad 2", "Ad 3", "Ad 4"}},
@@ -78,8 +76,8 @@ func TestCacheFilter(t *testing.T) {
 		{"Filter by Age, Country, and Platform", AdQuery{Offset: 0, Limit: 3, Age: 30, Country: "TW", Platform: "web"}, 0, nil},
 	}
 
-	for _, tc := range testCases{
-		t.Run(tc.name, func(t *testing.T){
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
 			results := cache.Filter(tc.query)
 			if len(results) != tc.expectedResults {
 				t.Errorf("Expected %d results, but got %d", tc.expectedResults, len(results))
